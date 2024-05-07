@@ -1,16 +1,33 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Dropdown with Dynamic Text</title>
-    <link rel="stylesheet" type="text/css" href="https://files.edx.org/custom-js-example/jsinput_example.css">
-  </head>
-  <body>
-    <script src="https://files.edx.org/custom-js-example/jschannel.js"></script>
-    <script src="https://files.edx.org/custom-js-example/jsinput_example.js" defer></script>
+<head>
+    <title>Dynamic Dropdown</title>
+    <style>
+        /* Add your CSS here */
+        .directions, .choices, .feedback {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
     <label class="directions">Select an option from the list:
-        <select class="choices"></select>
+        <select id="dropdown" class="choices" onchange="updateFeedback()">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
     </label>
-    <p aria-live="polite" class="feedback"></p>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vedd3670a3b1c4e178fdfb0cc912d969e1713874337387" integrity="sha512-EzCudv2gYygrCcVhu65FkAxclf3mYM6BCwiGUm6BEuLzSb5ulVhgokzCZED7yMIkzYVg65mxfIBNdNra5ZFNyQ==" data-cf-beacon='{"rayId":"87fd40c3dbb28bcc","version":"2024.4.1","token":"7e7e0d8a3be64c7ba2cf01bcb532c718"}' crossorigin="anonymous"></script>
+    <p aria-live="polite" class="feedback" id="feedback"></p>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var select = document.getElementById('dropdown');
+    select.addEventListener('change', updateFeedback);
+});
+
+function updateFeedback() {
+    var select = document.getElementById('dropdown');
+    var feedback = document.getElementById('feedback');
+    feedback.innerHTML = "You selected: " + select.options[select.selectedIndex].text;
+}
+</script>
 </body>
 </html>
